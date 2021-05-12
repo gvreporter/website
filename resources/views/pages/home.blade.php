@@ -2,7 +2,11 @@
 @section('seo::title', 'Home')
 
 @section('app')
-    GV Reporter
+    
+
+    <span id="title">Gobetti Volta Reporter</span>
+
+
     {{ $lastPost->title }}
     <br><br>
     @foreach ($posts as $post)
