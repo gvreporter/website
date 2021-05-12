@@ -26,7 +26,11 @@ class Post extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = [
+        'views',
+        'user_id',
+        'updated_at'
+    ];
 
     /**
      * The attributes that should be cast to native types.
@@ -36,6 +40,15 @@ class Post extends Model
     protected $casts = [];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'author'
+    ];
+
+    /**
      * Get the content of the post
      *
      * @return string
@@ -43,5 +56,10 @@ class Post extends Model
     public function contents()
     {
         return Storage::disk('posts')->get($this->id . '.md');
+    }
+
+    public function getAuthorAttribute()
+    {
+        return User::find($this->user_id);
     }
 }
