@@ -29,6 +29,15 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\\Http\\Controllers';
 
     /**
+     * The controller namespace for the admin.
+     *
+     * When present, controller route declarations will automatically be prefixed with this namespace.
+     *
+     * @var string|null
+     */
+    protected $adminNamespace = 'App\\Http\\Controllers\\Admin';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
@@ -46,6 +55,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            Route::prefix('admin')
+                ->middleware(['web', 'auth'])
+                ->namespace($this->adminNamespace)
+                ->group(base_path('routes/admin.php'));
         });
     }
 
