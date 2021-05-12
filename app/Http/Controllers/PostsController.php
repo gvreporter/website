@@ -14,7 +14,11 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::limit(20)->get();
+
+        return view('pages.posts.list', [
+            'posts' => $posts
+        ]);
     }
 
     /**
