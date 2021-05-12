@@ -1,0 +1,32 @@
+.post {
+
+    display: flex;
+    flex-direction: row;
+
+    &_img {
+        width: 200px;
+        height: 125px;
+
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    &_info {
+        margin-left: 10px;
+
+        display: flex;
+        flex-direction: column;
+
+        color: rgba($color: #000000, $alpha: 0.7);
+        font-size: 11pt;
+    }
+
+    &_title {
+        font-family: 'Work Sans', sans-serif;
+        margin-bottom: 3px;
+
+        color: #000000;
+        font-size: 18pt;
+        font-weight: 500;
+    }
+}

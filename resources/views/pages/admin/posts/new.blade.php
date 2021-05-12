@@ -18,6 +18,7 @@
             </ul>
         @endif
         <input type="text" name="name" placeholder="Nome articolo" required>
+        <input type="text" name="cover" placeholder="URL copertina" required>
         <textarea name="article" id="editor"></textarea>
         <input type="submit" value="CREA">
     </form>

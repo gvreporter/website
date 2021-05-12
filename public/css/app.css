@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
 .bignav {
@@ -13,4 +14,29 @@ body {
   font-size: 30pt;
   font-weight: 400;
   font-family: "Nanum Myeongjo", serif;
+}
+
+.post {
+  display: flex;
+  flex-direction: row;
+}
+.post_img {
+  width: 200px;
+  height: 125px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.post_info {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 11pt;
+}
+.post_title {
+  font-family: "Work Sans", sans-serif;
+  margin-bottom: 3px;
+  color: #000000;
+  font-size: 18pt;
+  font-weight: 500;
 }

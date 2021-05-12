@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -46,7 +47,8 @@ class Post extends Model
      * @var array
      */
     protected $appends = [
-        'author'
+        'author',
+        'localized_date'
     ];
 
     /**
@@ -67,5 +69,15 @@ class Post extends Model
     public function getAuthorAttribute()
     {
         return User::find($this->user_id);
+    }
+
+    /**
+     * Get the author of the post
+     *
+     * @return string
+    */
+    public function getLocalizedDateAttribute()
+    {
+        return Carbon::parse($this->created_at)->isoFormat('DD/MM/YYYY [alle] HH:mm');
     }
 }

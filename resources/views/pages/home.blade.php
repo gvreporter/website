@@ -10,6 +10,6 @@
     {{ $lastPost->title }}
     <br><br>
     @foreach ($posts as $post)
-        {{ $post->title }}
+        @include('partials.post-tile')
     @endforeach
 @endsection
