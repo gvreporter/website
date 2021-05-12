@@ -58,6 +58,11 @@ class Post extends Model
         return Storage::disk('posts')->get($this->id . '.md');
     }
 
+    /**
+     * Get the author of the post
+     *
+     * @return string
+    */
     public function getAuthorAttribute()
     {
         return User::find($this->user_id);
