@@ -9,6 +9,7 @@ body {
 }
 .bignav .title {
   text-align: center;
+  color: rgba(0, 0, 0, 0.6);
   font-size: 30pt;
   font-weight: 400;
   font-family: "Nanum Myeongjo", serif;
