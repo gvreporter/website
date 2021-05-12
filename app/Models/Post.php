@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -33,4 +34,14 @@ class Post extends Model
      * @var array
      */
     protected $casts = [];
+
+    /**
+     * Get the content of the post
+     *
+     * @return string
+    */
+    public function contents()
+    {
+        return Storage::disk('posts')->get($this->id . '.md');
+    }
 }
