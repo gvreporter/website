@@ -3,8 +3,13 @@ body {
   padding: 0;
 }
 
-#title {
-  font-size: 21pt;
+.bignav {
+  width: 100%;
+  padding-top: 5px;
+}
+.bignav .title {
+  text-align: center;
+  font-size: 30pt;
   font-weight: 400;
   font-family: "Nanum Myeongjo", serif;
 }

@@ -4,7 +4,7 @@
 @section('app')
     
 
-    <span id="title">Gobetti Volta Reporter</span>
+    @include('navigation.big-nav')
 
 
     {{ $lastPost->title }}
