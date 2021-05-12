@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only(['username', 'password']);
         if(Auth::attempt($credentials)) {
-            return redirect()->route('home');
+            return redirect('/admin');
         }
 
         return back()

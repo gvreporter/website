@@ -9,6 +9,6 @@ class DashboardController extends Controller
 {
     public function home()
     {
-        return view('pages.home');
+        return view('pages.admin.home');
     }
 }
