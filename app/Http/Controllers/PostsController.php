@@ -33,6 +33,9 @@ class PostsController extends Controller
 
         if(!$post) return abort(404);
 
+        $post->views++;
+        $post->save();
+
         return view('pages.posts.show', [
             'post' => $post
         ]);
