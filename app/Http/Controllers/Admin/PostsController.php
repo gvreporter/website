@@ -20,6 +20,7 @@ class PostsController extends Controller
     {
         $post = new Post;
         $post->title = $request->get('name');
+        $post->cover_url = $request->get('cover');
         $post->slug = Str::slug($request->get('name'), '-', 'it');
         $post->user_id = Auth::id();
         $post->save();

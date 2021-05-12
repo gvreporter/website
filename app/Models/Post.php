@@ -11,7 +11,7 @@ class Post extends Model
     use HasFactory;
 
     /**
-     * The attributes that  are mass assignable.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
@@ -19,6 +19,7 @@ class Post extends Model
         'slug',
         'title',
         'user_id',
+        'cover_url',
     ];
 
     /**
