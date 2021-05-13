@@ -7,16 +7,27 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
+    /**
+     * Render the new post page
+     *
+     * @return \Illuminate\Support\Facades\Response
+    */
     public function create()
     {
         return view('pages.admin.posts.new');
     }
 
+    /**
+     * Store the new post
+     *
+     * @return \Illuminate\Support\Facades\Response
+    */
     public function store(StorePostRequest $request)
     {
         $post = new Post;
@@ -32,6 +43,11 @@ class PostsController extends Controller
         return redirect()->route('dash');
     }
 
+    /**
+     * Render the post image
+     *
+     * @return \Illuminate\Support\Facades\Response
+    */
     public function showImage(string $slug)
     {
         $post = Post::where('slug', $slug)->first();
