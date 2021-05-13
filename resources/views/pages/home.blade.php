@@ -7,9 +7,11 @@
     @include('navigation.big-nav')
 
 
-    {{ $lastPost->title }}
-    <br><br>
-    @foreach ($posts as $post)
-        @include('partials.post-tile')
-    @endforeach
+    @include('partials.post-tile', ['post' => $lastPost, 'primary' => true])
+
+    <div class="list">
+        @foreach ($posts as $post)
+            @include('partials.post-tile')
+        @endforeach
+    </div>
 @endsection

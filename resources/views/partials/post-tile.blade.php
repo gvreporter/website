@@ -1,8 +1,9 @@
 @php
     $url = route('posts::show', $post->slug);
+    $primary = $primary ?? false;
 @endphp
 
-<article class="post">
+<article class="post{{ $primary ? " post-primary" : "" }}">
     <a href="{{ $url }}" title="Vai all'articolo">
         <div class="post_img" style="background-image: url({{ $post->cover_url }})"></div>
     </a>

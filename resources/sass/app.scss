@@ -1,4 +1,7 @@
 @import 'base';
 
+@import 'layouts/wrap',
+        'layouts/list';
+
 @import 'components/big-nav.scss',
         'components/post.scss';

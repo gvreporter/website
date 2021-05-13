@@ -15,7 +15,7 @@
     @yield('head')
 </head>
 <body>
-    <div class="app">
+    <div class="app wrap">
         @section('app')
             Oh no, this shouldn't happen
         @show
