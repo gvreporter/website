@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Log;
 
 class Post extends Model
 {
@@ -59,6 +61,31 @@ class Post extends Model
     public function contents()
     {
         return Storage::disk('posts')->get($this->id . '.md');
+    }
+
+    /**
+     * Generate the sharable image
+     *
+     * @return \Intervention\Image\Image
+    */
+    public function generateImage()
+    {
+        $text = wordwrap($this->title, 20, PHP_EOL);
+        $canvas = Image::canvas(1080, 1080);
+        $canvas->fill("#000000");
+        $image = Image::canvas(1080, 1080)
+            ->insert($this->cover_url, 'center-center')
+            ->opacity(50);
+        $canvas->insert($image);
+        $canvas->text($text, 100, 100, function($font) {
+            $font->file(resource_path('fonts/WorkSans.ttf'));
+            $font->size(100);
+            $font->color('#ffffff');
+        });
+
+        Log::info(gettype($canvas));
+
+        return $canvas;
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
@@ -29,5 +30,14 @@ class PostsController extends Controller
         Storage::disk('posts')->put($post->id . '.md', $content);
 
         return redirect()->route('dash');
+    }
+
+    public function showImage(string $slug)
+    {
+        $post = Post::where('slug', $slug)->first();
+
+        if(!$post) return abort(404);
+
+        return $post->generateImage()->response('jpg');
     }
 }

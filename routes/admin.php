@@ -8,4 +8,6 @@ Route::get('/logout', 'DashboardController@logout')->name('logout');
 Route::prefix('/posts')->group(function() {
     Route::get('/new', 'PostsController@create')->name('posts::new');
     Route::post('/new', 'PostsController@store');
+
+    Route::get('/{slug}/image', 'PostsController@showImage')->name('posts::image');
 });
