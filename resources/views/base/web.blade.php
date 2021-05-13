@@ -15,6 +15,13 @@
     @yield('head')
 </head>
 <body>
+    @section('nav')
+        @include('navigation.navigation')
+    @show
+    
+    @section('pre-app')
+    
+    @show
     <div class="app wrap">
         @section('app')
             Oh no, this shouldn't happen
