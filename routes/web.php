@@ -7,7 +7,7 @@ Route::get('/', 'HomeController@home')->name('home');
 Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/login', 'AuthController@doLogin');
 Route::prefix('/oauth')->group(function () {
-    Route::get('/', 'AuthController@oauthRedirect');
+    Route::get('/', 'AuthController@oauthRedirect')->name('oauth::login');
     Route::get('/callback', 'AuthController@handleOauth');
 });
 

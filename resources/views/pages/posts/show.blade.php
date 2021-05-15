@@ -10,11 +10,15 @@
         @if (session()->has('comment_status'))
             Il tuo commento è stato pubblicato correttamente!
         @endif
-        <form action="{{ route('posts::comment', $post->slug) }}" method="post">
-            @csrf
-            <input type="text" name="comment" required>
-            <input type="submit" value="COMMENTA">
-        </form>
+        @if (Auth::check())
+            <form action="{{ route('posts::comment', $post->slug) }}" method="post">
+                @csrf
+                <input type="text" name="comment" required>
+                <input type="submit" value="COMMENTA">
+            </form>
+        @else
+            <a href="{{ route('oauth::login') }}">Loggati</a> per poter commentare i post.
+        @endif
         @if ($comments)
             @foreach ($comments as $comment)
                 {{ $comment->content }} <br>
