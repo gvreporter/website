@@ -6,6 +6,10 @@ Route::get('/', 'HomeController@home')->name('home');
 
 Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/login', 'AuthController@doLogin');
+Route::prefix('/oauth')->group(function () {
+    Route::get('/', 'AuthController@oauthRedirect');
+    Route::get('/callback', 'AuthController@handleOauth');
+});
 
 Route::prefix('/articoli')->group(function() {
     Route::get('/', 'PostsController@index')->name('posts');
