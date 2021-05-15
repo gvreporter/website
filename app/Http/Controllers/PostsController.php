@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCommentRequest;
 use App\Models\Post;
+use App\Repositories\CommentsRepository;
 use Illuminate\Http\Request;
 use App\Repositories\PostsRepository;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -14,8 +17,14 @@ class PostsController extends Controller
     */
     protected $posts;
 
-    public function __construct(PostsRepository $posts) {
+    /**
+     * @var \App\Repositories\CommentsRepository
+    */
+    protected $comments;
+
+    public function __construct(PostsRepository $posts, CommentsRepository $comments) {
         $this->posts = $posts;
+        $this->comments = $comments;
     }
 
     /**
@@ -41,9 +50,32 @@ class PostsController extends Controller
     public function show(string $slug)
     {
         $post = $this->posts->findBySlug($slug, true);
+        if(!$post) return abort(404);
+
+        $comments = $this->comments->postComments($post);
 
         return view('pages.posts.show', [
-            'post' => $post
+            'post' => $post,
+            'comments' => $comments,
         ]);
+    }
+
+    /**
+     * Comment a post
+     *
+     * @param string $slug
+     * @param \App\Http\Requests\StoreCommentRequest
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function comment(string $slug, StoreCommentRequest $request)
+    {
+        $post = $this->posts->findBySlug($slug);
+        if(!$post) return abort(404);
+
+        $this->comments->commentPost($post, $request->get('comment'), Auth::user());
+
+        return back()
+            ->with(['comment_status' => 'success']);
     }
 }

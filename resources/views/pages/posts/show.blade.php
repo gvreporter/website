@@ -2,5 +2,23 @@
 @section('seo::title', $post->title)
 
 @section('app')
-    @markdown($post->contents())
+    <article class="post-content">
+        @markdown($post->contents())
+    </article>
+    <h2>Commenti</h2>
+    <div class="comments">
+        @if (session()->has('comment_status'))
+            Il tuo commento è stato pubblicato correttamente!
+        @endif
+        <form action="{{ route('posts::comment', $post->slug) }}" method="post">
+            @csrf
+            <input type="text" name="comment" required>
+            <input type="submit" value="COMMENTA">
+        </form>
+        @if ($comments)
+            @foreach ($comments as $comment)
+                {{ $comment->content }} <br>
+            @endforeach
+        @endif
+    </div>
 @endsection

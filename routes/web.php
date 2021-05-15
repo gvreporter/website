@@ -14,4 +14,5 @@ Route::prefix('/oauth')->group(function () {
 Route::prefix('/articoli')->group(function() {
     Route::get('/', 'PostsController@index')->name('posts');
     Route::get('/{slug}', 'PostsController@show')->name('posts::show');
+    Route::post('/{slug}/comment', 'PostsController@comment')->middleware(['auth', 'role:user'])->name('posts::comment');
 });
