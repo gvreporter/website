@@ -21,7 +21,7 @@
                     />
                     <input
                         class="login_form_field"
-                        type="text"
+                        type="password"
                         name="password"
                         required="true"
                         placeholder="Password"

@@ -1,0 +1,27 @@
+@keyframes marquee {
+    0% { left: 0; }
+    100% { left: -100%; }
+}
+
+.quotes-bar {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 25px;
+
+    &_container {
+        display: block;
+        width: 200%;
+        height: 30px;
+
+        position: absolute;
+        overflow: hidden;
+
+        animation: marquee 30s linear infinite;
+    }
+
+    .quotes {
+        float: left;
+        width: 50%;
+    }
+}

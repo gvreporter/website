@@ -12,6 +12,8 @@ Route::prefix('/oauth')->group(function () {
     Route::get('/callback', 'AuthController@handleOauth');
 });
 
+Route::post('/quote', 'QuotesController@store')->name('quotes');
+
 Route::prefix('/articoli')->group(function() {
     Route::get('/', 'PostsController@index')->name('posts');
     Route::get('/{slug}', 'PostsController@show')->name('posts::show');
