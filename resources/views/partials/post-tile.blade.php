@@ -9,9 +9,9 @@
     </a>
     <div class="post_info">
         <a href="{{ $url }}" title="Vai all'articolo"><span class="post_title">{{ $post->title }}</span></a>
-        @auth
+        @if(Auth::check() && Auth::user()->can('role', 'writer'))
             <span class="post_author">{{ $post->views }} views</span>
-        @endauth
+        @endif
         <span class="post_author">Articolo di {{ $post->author->name }}</span>
         <span class="post_publishedat">Pubblicato il {{ $post->localized_date }}</span>
     </div>
