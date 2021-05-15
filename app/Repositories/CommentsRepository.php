@@ -45,6 +45,6 @@ class CommentsRepository {
     */
     public function postComments(Post $post): Collection
     {
-        return Comment::where('post_id', $post->id)->get();
+        return Comment::where('post_id', $post->id)->orderBy('created_at', 'desc')->get();
     }
 }

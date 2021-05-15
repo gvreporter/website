@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@home')->name('home');
 
-Route::get('/logout', 'DashboardController@logout')->name('logout');
+Route::get('/logout', 'AuthController@logout')->name('logout');
 Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/login', 'AuthController@doLogin');
 Route::prefix('/oauth')->group(function () {

@@ -49,6 +49,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'pic_url'
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -74,5 +83,11 @@ class User extends Authenticatable
         $owned = array_search($this->role, $this->roles);
 
         return $owned <= $wanted;
+    }
+
+
+    public function getPicUrlAttribute()
+    {
+        return $profile_pic_url ?? url('/imgs/no-pic.png');
     }
 }

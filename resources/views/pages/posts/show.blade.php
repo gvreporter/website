@@ -20,9 +20,11 @@
             <a href="{{ route('oauth::login') }}">Loggati</a> per poter commentare i post.
         @endif
         @if ($comments)
-            @foreach ($comments as $comment)
-                {{ $comment->content }} <br>
-            @endforeach
+            <div class="comments-list">
+                @foreach ($comments as $comment)
+                    @include('partials.comment')
+                @endforeach
+            </div>
         @endif
     </div>
 @endsection
