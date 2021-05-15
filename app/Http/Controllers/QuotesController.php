@@ -20,7 +20,7 @@ class QuotesController extends Controller
 
     public function store(Request $request)
     {
-        $this->quotes->storeQuote($request->get('message'), $request->ip());
+        $this->quotes->storeQuote($request->get('message'), env('APP_DEBUG') ? null : $request->ip());
         return back();
     }
 }

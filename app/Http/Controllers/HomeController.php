@@ -14,7 +14,7 @@ class HomeController extends Controller
     protected $posts;
 
     /**
-     * @var \App\Repositories\PostsRepository
+     * @var \App\Repositories\QuotesRepository
     */
     protected $quotes;
 

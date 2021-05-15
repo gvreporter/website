@@ -10,3 +10,8 @@ Route::prefix('/posts')->group(function() {
 
     Route::get('/{slug}/image', 'PostsController@showImage')->name('posts::image');
 });
+
+Route::prefix('/quotes')->group(function () {
+    Route::get('/{id}/approve', 'QuotesController@approve')->name('quotes::approve');
+    Route::get('/{id}/remove', 'QuotesController@remove')->name('quotes::remove');
+});
