@@ -56,7 +56,6 @@ class AuthController extends Controller
         $user = User::firstOrCreate([
             'profile_pic_url' => $guser->getAvatar(),
             'google_id' => $guser->getId(),
-            // TODO: Not working
             'name' => name_case_string($guser->getName()),
             'username' => $username,
             'password' => 'GOOGLE-OAUTH', // Non hashed password to know that the user logged with a Google Account

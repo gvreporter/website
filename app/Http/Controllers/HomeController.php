@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Repositories\PostsRepository;
 use App\Repositories\QuotesRepository;
 
