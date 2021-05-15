@@ -33,6 +33,7 @@ class User extends Authenticatable
         'username',
         'password',
         'google_id',
+        'profile_pic_url',
     ];
 
     /**
@@ -88,6 +89,6 @@ class User extends Authenticatable
 
     public function getPicUrlAttribute()
     {
-        return $profile_pic_url ?? url('/imgs/no-pic.png');
+        return $this->profile_pic_url ?? url('/imgs/no-pic.png');
     }
 }

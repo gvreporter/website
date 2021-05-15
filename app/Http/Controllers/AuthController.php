@@ -7,6 +7,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
+use function App\Helpers\name_case_string;
+
+const ALLOWED_HD = ['studenti.gobettivolta.edu.it', 'gobettivolta.edu.it'];
 
 class AuthController extends Controller
 {
@@ -40,18 +45,22 @@ class AuthController extends Controller
             ->redirect();
     }
 
-    public function handleOauth()
+    public function handleOauth(Request $request)
     {
+        if(!$request->get('hd') || !in_array($request->get('hd'), ALLOWED_HD)) return abort(401);
+
         $guser = Socialite::driver('google')->user();
 
         $username = $guser->getNickname() ?? Str::slug($guser->getName());
 
         $user = User::firstOrCreate([
+            'profile_pic_url' => $guser->getAvatar(),
             'google_id' => $guser->getId(),
-            'name' => $guser->getName(),
+            // TODO: Not working
+            'name' => name_case_string($guser->getName()),
             'username' => $username,
             'password' => 'GOOGLE-OAUTH', // Non hashed password to know that the user logged with a Google Account
-            'role' => 'user'
+            'role' => 'user',
         ]);
 
         Auth::login($user);
