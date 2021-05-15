@@ -94,11 +94,12 @@ a {
 .post-primary .post_img {
   width: 100%;
   height: 600px;
+  border-radius: 5px;
   filter: brightness(60%);
 }
 .post-primary .post_info {
   position: absolute;
-  bottom: 0;
+  bottom: 5px;
   color: rgba(255, 255, 255, 0.8);
 }
 .post-primary .post_title {
@@ -181,6 +182,7 @@ a {
   }
 }
 .quotes-bar {
+  margin-top: 10px;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -198,6 +200,15 @@ a {
 .quotes-bar .quotes {
   float: left;
   width: 50%;
+}
+.quotes-bar .quote {
+  margin-left: 20px;
+}
+.quotes-bar .quote:first-child {
+  margin-left: 0;
+}
+.quotes-bar .quote_message {
+  font-weight: 600;
 }
 
 .elevation_anim {

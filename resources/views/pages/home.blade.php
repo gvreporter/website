@@ -4,17 +4,22 @@
 @section('nav')
     @include('navigation.big-nav')
 
-    Ultimi sputi
     <div class="quotes-bar">
         <div class="quotes-bar_container">
             <div class="quotes">
+                Ultimi sputi: 
                 @foreach ($quotes as $quote)
-                {{ $quote->message }} -- {{ $quote->time_ago }}
-                @endforeach
-            </div>
-            <div class="quotes">
+                    <span class="quote">
+                        <span class="quote_message">{{ $quote->message }}</span> - {{ $quote->time_ago }}
+                    </span>
+                    @endforeach
+                </div>
+                <div class="quotes">
+                Ultimi sputi: 
                 @foreach ($quotes as $quote)
-                {{ $quote->message }} -- {{ $quote->time_ago }}
+                    <span class="quote">
+                        <span class="quote_message">{{ $quote->message }}</span> - {{ $quote->time_ago }}
+                    </span>
                 @endforeach
             </div>
         </div>

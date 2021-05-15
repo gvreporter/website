@@ -4,6 +4,7 @@
 }
 
 .quotes-bar {
+    margin-top: 10px;
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -23,5 +24,17 @@
     .quotes {
         float: left;
         width: 50%;
+    }
+
+    .quote {
+        margin-left: 20px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &_message {
+            font-weight: 600;
+        }
     }
 }
