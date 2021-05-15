@@ -34,6 +34,10 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->reportable(function (InsufficientRoleException $e) {
+            // Don't log the error
+            return false;
+        });
         $this->reportable(function (Throwable $e) {
             //
         });
