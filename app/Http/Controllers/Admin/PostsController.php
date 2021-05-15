@@ -6,11 +6,22 @@ use App\Models\Post;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StorePostRequest;
+use \App\Repositories\PostsRepository;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StorePostRequest;
 
 class PostsController extends Controller
 {
+
+    /**
+     * @var \App\Repositories\PostsRepository
+    */
+    protected $posts;
+
+    public function __construct(PostsRepository $posts) {
+        $this->posts = $posts;
+    }
+
     /**
      * Render the new post page
      *
@@ -28,15 +39,11 @@ class PostsController extends Controller
     */
     public function store(StorePostRequest $request)
     {
-        $post = new Post;
-        $post->title = $request->get('name');
-        $post->cover_url = $request->get('cover');
-        $post->slug = Str::slug($request->get('name'), '-', 'it');
-        $post->user_id = Auth::id();
-        $post->save();
-
+        $title = $request->get('name');
+        $cover = $request->get('cover');
         $content = $request->get('article');
-        Storage::disk('posts')->put($post->id . '.md', $content);
+
+        $this->posts->store($title, $cover, $content, Auth::user());
 
         return redirect()->route('dash');
     }
@@ -48,7 +55,7 @@ class PostsController extends Controller
     */
     public function showImage(string $slug)
     {
-        $post = Post::where('slug', $slug)->first();
+        $post = $this->posts->findBySlug($slug);
 
         if(!$post) return abort(404);
 

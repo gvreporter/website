@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Repositories\PostsRepository;
 
 class HomeController extends Controller
 {
+    /**
+     * @var \App\Repositories\PostsRepository
+    */
+    protected $posts;
+
+    public function __construct(PostsRepository $posts) {
+        $this->posts = $posts;
+    }
+
     /**
      *  Home page
      *
@@ -13,7 +23,7 @@ class HomeController extends Controller
     */
     public function home()
     {
-        $posts = Post::limit(20)->orderByDesc('created_at')->get();
+        $posts = $this->posts->latest();
 
         return view('pages.home', [
             'lastPost' => $posts[0],

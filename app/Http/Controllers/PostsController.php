@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Repositories\PostsRepository;
 
 class PostsController extends Controller
 {
+
+    /**
+     * @var \App\Repositories\PostsRepository
+    */
+    protected $posts;
+
+    public function __construct(PostsRepository $posts) {
+        $this->posts = $posts;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::limit(20)->get();
+        $posts = $this->posts->latest();
 
         return view('pages.posts.list', [
             'posts' => $posts
@@ -29,12 +40,7 @@ class PostsController extends Controller
      */
     public function show(string $slug)
     {
-        $post = Post::where('slug', $slug)->first();
-
-        if(!$post) return abort(404);
-
-        $post->views++;
-        $post->save();
+        $post = $this->posts->findBySlug($slug, true);
 
         return view('pages.posts.show', [
             'post' => $post
