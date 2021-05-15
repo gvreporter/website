@@ -177,6 +177,7 @@ return [
 
 
         Intervention\Image\ImageServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -232,7 +233,8 @@ return [
 
 
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

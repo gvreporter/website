@@ -30,4 +30,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_OAUTH_CLIENTID'),
+        'client_secret' => env('GOOGLE_OAUTH_SECRET'),
+        // About the redirect:
+        // For some reason google oauth doesn't accept .test domains, even if in test mode.
+        // So I made a small express server to redirect all the request from http://localhost/gvreporter_gcallback
+        // to http://gvreporter.test/oauth/callback
+        // Thanks Google.
+        'redirect' => env('GOOGLE_OAUTH_REDIRECT', 'http://localhost/gvreporter_gcallback'),
+    ],
+
 ];
