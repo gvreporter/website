@@ -13,10 +13,4 @@ class DashboardController extends Controller
         return view('pages.admin.home');
     }
 
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('/');
-    }
 }

@@ -20,13 +20,21 @@ a {
   margin-top: 10px;
 }
 
-.login h3 {
+.login_title {
   margin: 0;
   padding: 0;
   text-align: center;
   font-size: 23pt;
 }
+.login_subtitle {
+  text-align: center;
+  font-size: 11pt;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 20px;
+}
 .login_container {
+  z-index: 10;
+  background-color: #ffffff;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -39,9 +47,26 @@ a {
 .login_form {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 .login_form_field {
   margin-bottom: 5px;
+  outline: none;
+}
+.login_form_field:focus {
+  outline: none;
+}
+.login_form_submit {
+  background-color: #6d0cff;
+  border: none;
+  color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color ease-out 0.3s;
+}
+.login_form_submit:hover {
+  background-color: #6103ee;
 }
 
 .bignav {
@@ -101,4 +126,38 @@ a {
   color: #000000;
   font-size: 18pt;
   font-weight: 500;
+}
+
+.elevation_anim {
+  transition: box-shadow 0.2s ease;
+}
+.elevation_anim_1:hover {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.elevation_anim_2:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.elevation_anim_3:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.elevation_anim_4:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.elevation_anim_5:hover {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+.elevation_1 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.elevation_2 {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.elevation_3 {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.elevation_4 {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.elevation_5 {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }

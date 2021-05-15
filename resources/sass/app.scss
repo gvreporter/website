@@ -1,4 +1,5 @@
 @import 'base';
+@import 'colors';
 
 @import 'layouts/wrap',
         'layouts/list';
@@ -7,3 +8,5 @@
 
 @import 'components/big-nav.scss',
         'components/post.scss';
+
+@import 'partials/elevation';

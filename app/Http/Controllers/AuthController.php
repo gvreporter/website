@@ -10,6 +10,12 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
     public function login()
     {
         return view('pages.login');

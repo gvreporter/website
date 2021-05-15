@@ -4,35 +4,37 @@
 @section('app')
     <div class="login">
         <div class="login_container">
-            <h3>Accedi</h3>
-            <span>Inserisci le tue credenziali da staff</span>
+            <h3 class="login_title">Accedi</h3>
+            <div class="login_subtitle">Inserisci le tue credenziali da staff</div>
             <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="login_form">
-                    <input 
+                    <input
                         class="login_form_field"
                         type="text"
+                        name="username"
+                        required="true"
+                        autofocus="true"
                         autocomplete="username"
                         placeholder="Username"
-                        name="username"
                         value="{{ old('username') }}"
-                        required
                     />
                     <input
                         class="login_form_field"
-                        type="password"
-                        autocomplete="current-password"
-                        placeholder="Password"
+                        type="text"
                         name="password"
-                        required
+                        required="true"
+                        placeholder="Password"
+                        autocomplete="current-password"
                     />
+                    <button type="submit" class="login_form_submit elevation_1 elevation_anim elevation_anim_2">Login</button>
                 </div>
+
                 @error('password')
                     {{ $message }}
                 @enderror
-                <input type="submit" value="LOGIN">
             </form>
-            <span>Non fai parte dello staff? Loggati <a href="{{ route('oauth::login') }}">qui</a> con il tuo account istituzionale</span>
+            <span>Non fai parte dello staff? Clicca <a href="{{ route('oauth::login') }}">qui</a>.</span>
         </div>
     </div>
 @endsection
