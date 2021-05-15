@@ -3,9 +3,9 @@ namespace App\Repositories;
 
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Repository for all posts
@@ -69,5 +69,19 @@ class PostsRepository {
         }
 
         return $post;
+    }
+
+    /**
+     * Delete a post
+     *
+     * @param string $slug
+     *
+     * @return bool
+    */
+    public function remove(string $slug)
+    {
+        $post = $this->findBySlug($slug);
+        $post->delete();
+        return true;
     }
 }
