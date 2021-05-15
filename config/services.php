@@ -38,7 +38,7 @@ return [
         // So I made a small express server to redirect all the request from http://localhost/gvreporter_gcallback
         // to http://gvreporter.test/oauth/callback
         // Thanks Google.
-        'redirect' => env('GOOGLE_OAUTH_REDIRECT', 'http://localhost/gvreporter_gcallback'),
+        'redirect' => env('GOOGLE_OAUTH_REDIRECT', 'http://localhost:8083/gvreporter_gcallback'),
     ],
 
 ];

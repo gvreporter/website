@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -28,17 +29,21 @@ class AuthController extends Controller
 
     public function oauthRedirect()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->with(['hd' => 'gobettivolta.edu.it' ])
+            ->redirect();
     }
 
     public function handleOauth()
     {
         $guser = Socialite::driver('google')->user();
 
-        $user = User::findOrCreate([
+        $username = $guser->getNickname() ?? Str::slug($guser->getName());
+
+        $user = User::firstOrCreate([
             'google_id' => $guser->getId(),
             'name' => $guser->getName(),
-            'username' => $guser->getNickname(),
+            'username' => $username,
             'password' => 'GOOGLE-OAUTH', // Non hashed password to know that the user logged with a Google Account
             'role' => 'user'
         ]);
