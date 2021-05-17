@@ -11,6 +11,11 @@ Route::prefix('/posts')->group(function() {
     Route::get('/{slug}/image', 'PostsController@showImage')->name('posts::image');
 });
 
+Route::group(['prefix' => '/users', 'middleware' => 'role:admin'], function () {
+    Route::get('/', 'UsersController@index')->name('users');
+    Route::get('/{user}/edit', 'UsersController@edit')->name('users::edit');
+});
+
 Route::prefix('/quotes')->group(function () {
     Route::get('/{id}/approve', 'QuotesController@approve')->name('quotes::approve');
     Route::get('/{id}/remove', 'QuotesController@remove')->name('quotes::remove');
