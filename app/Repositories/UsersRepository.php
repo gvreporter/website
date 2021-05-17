@@ -65,4 +65,10 @@ class UsersRepository {
 
         return $user;
     }
+
+    public function delete($id)
+    {
+        $user = $this->find($id);
+        return $user->delete();
+    }
 }

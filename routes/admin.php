@@ -17,6 +17,7 @@ Route::group(['prefix' => '/users', 'middleware' => 'role:admin'], function () {
     Route::post('/new', 'UsersController@store');
     Route::get('/{user}/edit', 'UsersController@edit')->name('users::edit');
     Route::post('/{user}/edit', 'UsersController@update');
+    Route::get('/{user}/delete', 'UsersController@destroy')->name('users::delete');
 });
 
 Route::prefix('/quotes')->group(function () {

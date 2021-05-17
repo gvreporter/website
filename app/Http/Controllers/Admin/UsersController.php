@@ -62,17 +62,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -116,6 +105,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->users->delete($id);
+        return redirect()->route('users')->with('users_delete', 'success');
     }
 }

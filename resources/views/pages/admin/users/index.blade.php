@@ -6,6 +6,8 @@
         L'utente è stato aggiornato con successo!
     @elseif (session()->has('users_store'))
         L'utente è stato creato con successo!
+    @elseif (session()->has('users_delete'))
+        L'utente è stato eliminato con successo!
     @endif
     <a href="{{route('users::new')}}"><button type="button" class="login_form_submit elevation_1 elevation_anim elevation_anim_2">Crea utente</button></a>
     <table>
@@ -22,7 +24,10 @@
                 <th>{{$user->username}}</th>
                 <th>{{$user->name}}</th>
                 <th>{{$user->role}}</th>
-                <th><a href="{{route('users::edit', $user->id)}}">Modifica</a></th>
+                <th>
+                    <a href="{{route('users::edit', $user->id)}}">Modifica</a>
+                    <a href="{{route('users::delete', $user->id)}}">Elimina</a>
+                </th>
             </tr>
         @endforeach
     </table>

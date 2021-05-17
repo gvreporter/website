@@ -91,4 +91,14 @@ class User extends Authenticatable
     {
         return $this->profile_pic_url ?? url('/imgs/no-pic.png');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'author_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
