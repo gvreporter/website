@@ -47,4 +47,22 @@ class UsersRepository {
     {
         return User::all();
     }
+
+    public function find(int $id): ?User
+    {
+        return User::where('id', $id)->first();
+    }
+
+    public function update(User $user, ?string $name, ?string $username, ?string $role, ?string $googleId, ?string $profilePic)
+    {
+        $user->update([
+            'name' => $name,
+            'username' => $username,
+            'role' => $role,
+            'google_id' => $googleId,
+            'profile_pic_url' => $profilePic
+        ]);
+
+        return $user;
+    }
 }

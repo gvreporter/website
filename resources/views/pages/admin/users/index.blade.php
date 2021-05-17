@@ -2,6 +2,9 @@
 @section('seo::title', 'Utenti')
 
 @section('app')
+    @if (session()->has('users_edit'))
+        L'utente è stato aggiornato con successo!
+    @endif
     <table>
         <tr>
             <th>ID</th>

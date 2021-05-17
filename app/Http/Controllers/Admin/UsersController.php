@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UsersRepository;
 
 class UsersController extends Controller
@@ -69,21 +70,34 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $user = $this->users->find($id);
+        if(!$user) return abort(404);
+        return view('pages.admin.users.edit', [
+            'user' => $user,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateUserRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, int $id)
     {
-        //
+        $user = $this->users->find($id);
+        $this->users->update(
+            $user,
+            $request->get('name', $user->name),
+            $request->get('username', $user->username),
+            $request->get('role', $user->role),
+            $request->get('googleid', $user->google_id),
+            $request->get('profilepic', $user->profile_pic_url)
+        );
+        return redirect()->route('users')->with('users_edit', 'success');
     }
 
     /**
