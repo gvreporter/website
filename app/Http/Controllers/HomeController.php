@@ -34,7 +34,7 @@ class HomeController extends Controller
         $quotes = $this->quotes->latest();
 
         return view('pages.home', [
-            'lastPost' => isset($posts[0]) ?? null,
+            'lastPost' => isset($posts[0]) ? $posts[0] : null,
             'posts' => $posts->slice(1),
             'quotes' => $quotes,
         ]);
