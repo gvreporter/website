@@ -13,6 +13,8 @@ Route::prefix('/posts')->group(function() {
 
 Route::group(['prefix' => '/users', 'middleware' => 'role:admin'], function () {
     Route::get('/', 'UsersController@index')->name('users');
+    Route::get('/new', 'UsersController@create')->name('users::new');
+    Route::post('/new', 'UsersController@store');
     Route::get('/{user}/edit', 'UsersController@edit')->name('users::edit');
     Route::post('/{user}/edit', 'UsersController@update');
 });

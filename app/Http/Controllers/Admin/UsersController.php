@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\StoreUpdateUserRequest;
 use App\Repositories\UsersRepository;
 
 class UsersController extends Controller
@@ -39,7 +39,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.users.new');
     }
 
     /**
@@ -50,7 +50,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->users->store(
+            $request->get('name'),
+            $request->get('username'),
+            $request->get('password'),
+            $request->get('role', 'user'),
+            $request->get('googleid'),
+            $request->get('profilepic')
+        );
+        return redirect()->route('users')->with('users_store', 'success');
     }
 
     /**
@@ -86,7 +94,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, int $id)
+    public function update(StoreUpdateUserRequest $request, int $id)
     {
         $user = $this->users->find($id);
         $this->users->update(
