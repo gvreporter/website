@@ -35,7 +35,10 @@
         <input type="submit" value="SPUTA">
     </form>
 
-    @include('partials.post-tile', ['post' => $lastPost, 'primary' => true])
+    @if ($lastPost)
+        @include('partials.post-tile', ['post' => $lastPost, 'primary' => true])
+    @endif
+    
     <div class="list">
         @foreach ($posts as $post)
             @include('partials.post-tile')
