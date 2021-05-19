@@ -40,7 +40,6 @@
 
             function postSubmitter() {
                 $name.val($title.text());
-                alert('aaaa');
                 return true;
             }
         </script>
