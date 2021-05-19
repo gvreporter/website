@@ -11,9 +11,25 @@
 
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <script src="{{ mix('js/app.js') }}"></script>
-
-    <title>@yield('seo::title') - GV Reporter</title>
+    
     @yield('head')
+
+    {{-- Primary meta tags --}}
+    <title>@yield('seo::title') - GV Reporter</title>
+    <meta name="title" content="@yield('seo::title')">
+    <meta name="description" content="@yield('seo::desc', 'Il giornale scolastico del Gobetti Volta. Fatto dagli studenti, per gli studenti')">
+    
+    {{-- Open Graph / Facebook --}}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ URL::to('/') }}">
+    <meta property="og:title" content="@yield('seo::title')">
+    <meta property="og:description" content="@yield('seo::desc', 'Il giornale scolastico del Gobetti Volta. Fatto dagli studenti, per gli studenti')">
+
+    {{-- Twitter --}}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ URL::to('/') }}">
+    <meta property="twitter:title" content="@yield('seo::title')">
+    <meta property="twitter:description" content="@yield('seo::desc', 'Il giornale scolastico del Gobetti Volta. Fatto dagli studenti, per gli studenti')">
 </head>
 <body>
     @section('nav')
