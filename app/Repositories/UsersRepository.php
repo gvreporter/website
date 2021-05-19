@@ -71,4 +71,9 @@ class UsersRepository {
         $user = $this->find($id);
         return $user->delete();
     }
+
+    public function last(int $count = 10) : Collection
+    {
+        return User::limit($count)->orderByDesc('created_at')->get();
+    }
 }

@@ -211,6 +211,11 @@ a {
   font-weight: 600;
 }
 
+.dash {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .elevation_anim {
   transition: box-shadow 0.2s ease;
 }
