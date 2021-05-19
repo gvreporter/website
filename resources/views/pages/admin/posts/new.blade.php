@@ -7,7 +7,7 @@
 @endsection
 
 @section('app')
-    <form action="{{ route('posts::new') }}" method="post">
+    <form action="{{ route('posts::new') }}" method="post" onsubmit="return postSubmitter()">
         @csrf
         @if($errors->any())
             Si sono verificati degli errori
@@ -17,14 +17,32 @@
                 @endforeach
             </ul>
         @endif
-        <input type="text" name="name" placeholder="Nome articolo" required>
+        <h1 contenteditable="true" data-edited="false" id="post-title">Scrivi qui il titolo</h1>
+        <input hidden type="text" name="name">
         <input type="text" name="cover" placeholder="URL copertina" required>
         <textarea name="article" id="editor"></textarea>
         <input type="submit" value="CREA">
     </form>
 
 
-    <script>
-        const editor = new SimpleMDE({ element: document.getElementById('editor'), placeholder: "Scrivi il tuo articolo qui...", spellChecker: false });
-    </script>
+    @section('script')
+        <script>
+            const editor = new SimpleMDE({ element: document.getElementById('editor'), placeholder: "Scrivi il tuo articolo qui...", spellChecker: false });    
+            const $title = $('#post-title');
+            const $name = $('input[name=name]');
+
+            $title.on('click', function () {
+                if($title.data('edited') == false) {
+                    $title.text('');
+                    $title.data('edited', true);
+                }
+            });
+
+            function postSubmitter() {
+                $name.val($title.text());
+                alert('aaaa');
+                return true;
+            }
+        </script>
+    @endsection
 @endsection
