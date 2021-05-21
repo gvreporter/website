@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;300;400;500;700&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('/favicon.ico') }}">  
+    <link rel="shortcut icon" type="image/png" href="{{ URL::to('/favicon.png') }}">
 
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <script src="{{ mix('js/app.js') }}"></script>
