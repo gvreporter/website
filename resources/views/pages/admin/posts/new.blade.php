@@ -17,17 +17,37 @@
                 @endforeach
             </ul>
         @endif
-        <h1 contenteditable="true" data-edited="false" id="post-title">Scrivi qui il titolo</h1>
         <input hidden type="text" name="name">
-        <input type="text" name="cover" placeholder="URL copertina" required>
+
+        <h1 contenteditable="true" data-edited="false" id="post-title">Scrivi qui il titolo</h1>
+        <label for="post-cover">Copertina</label>
+        <input type="file" name="cover" accept="image/png, image/jpeg" id="post-cover" required>
         <textarea name="article" id="editor"></textarea>
         <input type="submit" value="CREA">
     </form>
 
+    <input type="file" style="display: none" id="file-chooser">
+
 
     @section('script')
         <script>
-            const editor = new SimpleMDE({ element: document.getElementById('editor'), placeholder: "Scrivi il tuo articolo qui...", spellChecker: false });    
+            const editor = new SimpleMDE({
+                element: document.getElementById('editor'),
+                placeholder: "Scrivi il tuo articolo qui...",
+                spellChecker: false,
+                toolbar: [
+                    "bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image",
+                    {
+                        name: "custom",
+                        action: (editor) => {
+                            
+                        },
+                        className: "fa fa-upload",
+                        title: "Carica un immagine",
+                    },
+                    "|", "preview", "side-by-side", "fullscreen", "|", "guide",
+                ]
+            });    
             const $title = $('#post-title');
             const $name = $('input[name=name]');
 
