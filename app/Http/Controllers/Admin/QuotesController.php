@@ -26,7 +26,7 @@ class QuotesController extends Controller
         $quote->approved = 1;
         $quote->save();
 
-        return back()->with('approved_quote', 'success');
+        return back()->with('success', 'Lo sputo è stato approvato!');
     }
 
     public function remove(int $id)
@@ -36,6 +36,6 @@ class QuotesController extends Controller
 
         $quote->delete();
 
-        return back()->with('removed_quote', 'success');
+        return back()->with('success', 'Lo sputo è stato rimosso.');
     }
 }

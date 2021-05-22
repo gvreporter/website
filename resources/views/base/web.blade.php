@@ -51,9 +51,18 @@
         @show
     </div>
 
+
+    <script src="{{ mix('js/app.js') }}"></script>
+
     @section('script')
     @show
 
-    <script src="{{ mix('js/app.js') }}"></script>
+    @section('success')
+        @if(session()->has('success'))
+            <script>
+                toastr.success("{{ session()->get('success') }}", 'Fatto');
+            </script>
+        @endif
+    @show
 </body>
 </html>

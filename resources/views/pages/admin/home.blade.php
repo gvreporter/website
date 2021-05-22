@@ -34,14 +34,4 @@
             @endforeach
         </fieldset>
     </div>
-
-    @section('script')
-        <script>
-            @if (session()->has('approved_quote'))
-                toastr.success('Lo sputo è stato approvato correttamente', 'Approvato!');
-            @elseif (session()->has('removed_quote'))
-                toastr.success('Lo sputo è stato rimosso correttamente', 'Rimosso!');
-            @endif
-        </script>
-    @endsection
 @endsection

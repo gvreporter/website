@@ -76,6 +76,6 @@ class PostsController extends Controller
         $this->comments->commentPost($post, $request->get('comment'), Auth::user());
 
         return back()
-            ->with(['comment_status' => 'success']);
+            ->with(['success' => 'Il tuo commento è stato pubblicato correttamente!']);
     }
 }

@@ -21,6 +21,6 @@ class QuotesController extends Controller
     public function store(Request $request)
     {
         $this->quotes->storeQuote($request->get('message'), env('APP_DEBUG') ? null : $request->ip());
-        return back();
+        return back()->with('success', 'Il tuo sputo è stato salvato. Ora verrà approvato dal nostro team!');
     }
 }
