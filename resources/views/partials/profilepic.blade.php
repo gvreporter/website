@@ -1,0 +1,1 @@
+<img src="{{ $url }}" alt="profile pic" class="comment_author_pic">

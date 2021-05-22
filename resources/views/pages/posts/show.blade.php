@@ -11,18 +11,8 @@
     </article>
     <h2>Commenti</h2>
     <div class="comments">
-        @if (session()->has('comment_status'))
-            Il tuo commento è stato pubblicato correttamente!
-        @endif
-        @if (Auth::check())
-            <form action="{{ route('posts::comment', $post->slug) }}" method="post">
-                @csrf
-                <input type="text" name="comment" required>
-                <input type="submit" value="COMMENTA">
-            </form>
-        @else
-            <a href="{{ route('oauth::login') }}">Loggati</a> per poter commentare i post.
-        @endif
+        @include('partials.comment-box')
+
         @if ($comments)
             <div class="comments-list">
                 @foreach ($comments as $comment)

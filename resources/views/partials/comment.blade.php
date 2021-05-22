@@ -1,6 +1,6 @@
 <div class="comment">
     <div class="comment_author">
-        <img src="{{ $comment->author->pic_url }}" alt="profile pic" class="comment_author_pic">
+        @include('partials.profilepic', ['url' => $comment->author->pic_url ])
         <span class="comment_author_name">{{ $comment->author->name }}</span>
 
         {{-- Badges --}}

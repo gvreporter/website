@@ -22,9 +22,11 @@
     },
     "dependencies": {
         "@toast-ui/editor": "^2.5.2",
+        "@types/feather-icons": "^4.7.0",
         "@types/jquery": "^3.5.5",
         "@types/simplemde": "^1.11.7",
         "@types/toastr": "^2.1.38",
+        "feather-icons": "^4.28.0",
         "jquery": "^3.6.0",
         "materialize-css": "^1.0.0-rc.2",
         "simplemde": "^1.11.2",
