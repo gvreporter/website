@@ -24,3 +24,7 @@ Route::prefix('/quotes')->group(function () {
     Route::get('/{id}/approve', 'QuotesController@approve')->name('quotes::approve');
     Route::get('/{id}/remove', 'QuotesController@remove')->name('quotes::remove');
 });
+
+Route::prefix('/upload')->group(function () {
+    Route::post('/', 'UploadController@store')->name('upload');
+});

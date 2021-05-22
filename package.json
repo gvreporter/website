@@ -21,6 +21,7 @@
         "typescript": "^4.2.4"
     },
     "dependencies": {
+        "@toast-ui/editor": "^2.5.2",
         "@types/jquery": "^3.5.5",
         "@types/simplemde": "^1.11.7",
         "@types/toastr": "^2.1.38",

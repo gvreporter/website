@@ -2,8 +2,14 @@
 @section('seo::title', 'Nuovo post')
 
 @section('head')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script> --}}
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"
+  />
+  <!-- Editor's Style -->
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 @endsection
 
 @section('app')
@@ -22,7 +28,7 @@
         <h1 contenteditable="true" data-edited="false" id="post-title">Scrivi qui il titolo</h1>
         <label for="post-cover">Copertina</label>
         <input type="file" name="cover" accept="image/png, image/jpeg" id="post-cover" required>
-        <textarea name="article" id="editor"></textarea>
+        <div id="editor"></div>
         <input type="submit" value="CREA">
     </form>
 
@@ -31,7 +37,7 @@
 
     @section('script')
         <script>
-            const editor = new SimpleMDE({
+            /* const editor = new SimpleMDE({
                 element: document.getElementById('editor'),
                 placeholder: "Scrivi il tuo articolo qui...",
                 spellChecker: false,
@@ -47,7 +53,7 @@
                     },
                     "|", "preview", "side-by-side", "fullscreen", "|", "guide",
                 ]
-            });    
+            });     */
             const $title = $('#post-title');
             const $name = $('input[name=name]');
 

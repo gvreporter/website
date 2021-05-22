@@ -12,7 +12,6 @@
     <link rel="shortcut icon" type="image/png" href="{{ URL::to('/favicon.png') }}">
 
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
-    <script src="{{ mix('js/app.js') }}"></script>
 
     {{-- Toast lib --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -54,5 +53,7 @@
 
     @section('script')
     @show
+
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
