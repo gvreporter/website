@@ -30,6 +30,13 @@ class AuthController extends Controller
     {
         $credentials = $request->only(['username', 'password']);
         if(Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if($user->role === 'user') {
+                return redirect()
+                    ->route('home')
+                    ->with('success', 'Bentornato ' . $user->name . "! Hai eseguito l'accesso correttamente");
+            }
+
             return redirect('/admin');
         }
 
@@ -51,12 +58,13 @@ class AuthController extends Controller
 
         $guser = Socialite::driver('google')->user();
 
-        $username = $guser->getNickname() ?? Str::slug($guser->getName());
+        $name = name_case_string($guser->getName());
+        $username = $guser->getNickname() ?? Str::slug($name);
 
         $user = User::firstOrCreate([
             'profile_pic_url' => $guser->getAvatar(),
             'google_id' => $guser->getId(),
-            'name' => name_case_string($guser->getName()),
+            'name' => $name,
             'username' => $username,
             'password' => 'GOOGLE-OAUTH', // Non hashed password to know that the user logged with a Google Account
             'role' => 'user',
@@ -64,6 +72,8 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()
+            ->route('home')
+            ->with('success', 'Bentornato ' . $name . "! Hai eseguito l'accesso correttamente");
     }
 }

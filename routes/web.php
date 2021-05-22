@@ -19,3 +19,9 @@ Route::prefix('/articoli')->group(function() {
     Route::get('/{slug}', 'PostsController@show')->name('posts::show');
     Route::post('/{slug}/comment', 'PostsController@comment')->middleware(['auth', 'role:user'])->name('posts::comment');
 });
+
+Route::group(['prefix' => '/settings', 'middleware' => 'auth'], function () {
+    Route::get('/', 'SettingsController@index')->name('settings');
+    Route::get('/delete', 'SettingsController@delete')->name('settings::delete');
+    Route::post('/delete', 'SettingsController@confirmDelete');
+});
