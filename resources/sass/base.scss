@@ -12,3 +12,7 @@ a {
 .error-msg {
     color: red;
 }
+
+body #toast-container > div {
+    opacity: 1;
+}
