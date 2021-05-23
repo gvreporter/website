@@ -33,7 +33,7 @@ class Post extends Model
     protected $hidden = [
         'views',
         'user_id',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -49,8 +49,8 @@ class Post extends Model
      * @var array
      */
     protected $appends = [
+        'localized_date',
         'author',
-        'localized_date'
     ];
 
     /**

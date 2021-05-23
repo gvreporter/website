@@ -47,6 +47,7 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'google_id',
+        'profile_pic_url'
     ];
 
     /**

@@ -38,6 +38,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = $this->posts->findById($id);
+        if(!$post) abort(404);
+
+        return response($post->contents(), 200, ['Content-Type' => 'text/markdown; charset=UTF-8']);
     }
 }

@@ -84,4 +84,24 @@ class PostsRepository {
         $post->delete();
         return true;
     }
+
+    /**
+     * Find a post by id
+     *
+     * @param int $id
+     * @param bool $countView
+     *
+     * @return \App\Models\Post
+    */
+    public function findById(int $id, bool $countView = false): ?Post
+    {
+        $post = Post::where('id', $id)->first();
+
+        if($post && $countView) {
+            $post->views++;
+            $post->save();
+        }
+
+        return $post;
+    }
 }
