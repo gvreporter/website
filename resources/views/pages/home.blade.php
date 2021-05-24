@@ -44,4 +44,12 @@
             @include('partials.post-tile')
         @endforeach
     </div>
+
+    @section('script')
+        @error('quote_error')
+            <script>
+                toastr.error("{{ $message }}", 'Oh no');
+            </script>
+        @enderror
+    @endsection
 @endsection

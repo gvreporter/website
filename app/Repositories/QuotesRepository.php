@@ -19,7 +19,7 @@ class QuotesRepository {
      *
      * @return \App\Models\Post
     */
-    public function storeQuote(string $message, ?string $ip): Quote
+    public function storeQuote(string $message, ?string $ip): ?Quote
     {
         if($ip) {
             $last = $this->lastFromIP($ip);
@@ -27,7 +27,7 @@ class QuotesRepository {
                 $now = date_create();
                 $diff = date_diff($last->created_at, $now);
                 // Abort if the last quote sent is from a less day ago
-                if($diff->format('%d') < 1) return abort(401);
+                if($diff->format('%d') < 1) return null;
             }
         }
 
