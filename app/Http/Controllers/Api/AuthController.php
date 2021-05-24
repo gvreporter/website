@@ -34,4 +34,10 @@ class AuthController extends Controller
             'user' => $user->toArray()
         ]);
     }
+
+    public function me()
+    {
+        $user = auth('api')->user();
+        return response()->json($user->toArray());
+    }
 }
