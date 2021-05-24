@@ -3,7 +3,13 @@ namespace App\Repositories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
+use function App\Helpers\name_case_string;
+
+const ALLOWED_HD = ['studenti.gobettivolta.edu.it', 'gobettivolta.edu.it'];
 
 /**
  * Repository for all users
@@ -48,32 +54,91 @@ class UsersRepository {
         return User::all();
     }
 
+    /**
+     * Find a user by its id
+     *
+     * @param int $id
+     *
+     * @return \App\Models\User
+    */
     public function find(int $id): ?User
     {
         return User::where('id', $id)->first();
     }
 
-    public function update(User $user, ?string $name, ?string $username, ?string $role, ?string $googleId, ?string $profilePic)
+    /**
+     * Update a user
+     *
+     * @param \App\Models\User $user
+     * @param null|string $name
+     * @param null|string $username
+     * @param null|string $role
+     * @param null|string $googleId
+     * @param null|string $profilePic
+     *
+     * @return bool
+    */
+    public function update(User $user, ?string $name, ?string $username, ?string $role, ?string $googleId, ?string $profilePic): bool
     {
-        $user->update([
-            'name' => $name,
-            'username' => $username,
-            'role' => $role,
-            'google_id' => $googleId,
-            'profile_pic_url' => $profilePic
-        ]);
+        $user->name = $name;
+        $user->username = $username;
+        $user->role = $role;
+        $user->google_id = $googleId;
+        $user->profile_pic_url = $profilePic;
 
-        return $user;
+        return $user->save();
     }
 
-    public function delete($id)
+    /**
+     * Delete a user
+     *
+     * @param int $id The user id
+     *
+     * @return bool
+    */
+    public function delete(int $id): bool
     {
         $user = $this->find($id);
-        return $user->delete();
+        return $user->delete() ?? false;
     }
 
+    /**
+     * Fetch last (10) users registered
+     *
+     * @param int $count Defaults to 10
+     *
+     * @return \App\Models\User
+    */
     public function last(int $count = 10) : Collection
     {
         return User::limit($count)->orderByDesc('created_at')->get();
+    }
+
+    /**
+     * Get a user logged from Google OAuth
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \App\Models\User
+    */
+    public function fromOAuth(Request $request): User
+    {
+        if(!$request->get('hd') || !in_array($request->get('hd'), ALLOWED_HD)) return abort(401);
+
+        $guser = Socialite::driver('google')->user();
+
+        $name = name_case_string($guser->getName());
+        $username = $guser->getNickname() ?? Str::slug($name);
+
+        $user = User::firstOrCreate([
+            'profile_pic_url' => $guser->getAvatar(),
+            'google_id' => $guser->getId(),
+            'name' => $name,
+            'username' => $username,
+            'password' => 'GOOGLE-OAUTH', // Non hashed password to know that the user logged with a Google Account
+            'role' => 'user',
+        ]);
+
+        return $user;
     }
 }

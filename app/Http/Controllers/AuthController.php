@@ -3,18 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-
-use function App\Helpers\name_case_string;
+use App\Repositories\UsersRepository;
+use Illuminate\Support\Facades\Log;
 
 const ALLOWED_HD = ['studenti.gobettivolta.edu.it', 'gobettivolta.edu.it'];
 
 class AuthController extends Controller
 {
+    /**
+     * @var \App\Repositories\UsersRepository
+    */
+    protected $users;
+
+    public function __construct(UsersRepository $users) {
+        $this->users = $users;
+    }
+
+
     public function logout()
     {
         Auth::logout();
@@ -45,8 +53,13 @@ class AuthController extends Controller
             ->withInput(['username' => $request->get('username')]);
     }
 
-    public function oauthRedirect()
+    public function oauthRedirect(Request $request)
     {
+        // The app will use ?continue=app so when the login will successed it will be redirected
+        // to gvreporter://login?code=ABC123
+        if($request->get('continue', 'web') === 'app') {
+            $request->session()->flash('oauth::continue', 'app');
+        }
         return Socialite::driver('google')
             ->with(['hd' => 'gobettivolta.edu.it' ])
             ->redirect();
@@ -54,26 +67,20 @@ class AuthController extends Controller
 
     public function handleOauth(Request $request)
     {
-        if(!$request->get('hd') || !in_array($request->get('hd'), ALLOWED_HD)) return abort(401);
+        $user = $this->users->fromOAuth($request);
 
-        $guser = Socialite::driver('google')->user();
+        // Check if the user wanted to login with apis
+        if($request->session()->get('oauth::continue') == 'app') {
+            // Get the user jwt (token) and return that to the app
+            $token = auth('api')->login($user);
+            return redirect('gvreporter://login?code='.$token);
+        } else {
+            Auth::login($user);
 
-        $name = name_case_string($guser->getName());
-        $username = $guser->getNickname() ?? Str::slug($name);
+            return redirect()
+                ->route('home')
+                ->with('success', 'Bentornato ' . $user->name . "! Hai eseguito l'accesso correttamente");
+        }
 
-        $user = User::firstOrCreate([
-            'profile_pic_url' => $guser->getAvatar(),
-            'google_id' => $guser->getId(),
-            'name' => $name,
-            'username' => $username,
-            'password' => 'GOOGLE-OAUTH', // Non hashed password to know that the user logged with a Google Account
-            'role' => 'user',
-        ]);
-
-        Auth::login($user);
-
-        return redirect()
-            ->route('home')
-            ->with('success', 'Bentornato ' . $name . "! Hai eseguito l'accesso correttamente");
     }
 }
